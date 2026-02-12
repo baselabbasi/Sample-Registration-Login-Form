@@ -1,0 +1,162 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+}
+
+.LoginSection,
+.RegistrationSection {
+  width: 1150px;
+  display: flex;
+  margin: 70px auto;
+  background-color: #f6f6f6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left.side {
+  width: 37%;
+  background-color: #08a7f7;
+  color: #fff;
+  padding: 75px 50px;
+  position: relative;
+}
+.left.side .signup h1,
+.left.side .signin h1 {
+  font-size: 52px;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.left.side .signup p,
+.left.side .signin p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  max-width: 250px;
+}
+.left.side .signin {
+  position: absolute;
+  bottom: 70px;
+  left: 55px;
+}
+/* Rigt side styling */
+
+.right.side {
+  width: 63%;
+  padding: 85px 140px;
+  position: relative;
+}
+.email {
+    width: 250px;
+   
+}
+.right.side form label {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #444;
+}
+.right.side form input[type="text"],
+.right.side form input[type="email"],
+.right.side form input[type="password"],
+.right.side form select {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #e1e1e1;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  height: 30px;
+}
+
+.right.side form input:focus,
+.right.side form select:focus {
+  border-bottom-color: #bdbdbd;
+}
+.right.side form textarea {
+  width: 100%;
+  border: 2px solid #e1e1e1;
+  border-radius: 6px;
+  padding: 10px;
+  outline: none;
+  font-size: 15px;
+  resize: none;
+  margin-bottom: 28px;
+}
+.right.side form input[type="checkbox"],
+.right.side form input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.right.side form label[for="Agreement"] {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  color: #666;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+.right.side form input[type="button"] {
+  background: #52d12c;
+  border: none;
+  color: white;
+  padding: 11px 42px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 2px;
+}
+
+#or {
+  display: inline-block;
+  margin: 0 18px;
+  color: #666;
+  font-size: 14px;
+}
+.LoginSection .right.side form input[type="submit"]:last-of-type,
+.RegistrationSection .right.side form input[type="submit"]:last-of-type {
+  background: transparent;
+  color: #333;
+  padding: 0;
+  font-size: 16px;
+  text-decoration: underline;
+  border: none;
+}
+.right.side form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.right.side br {
+  display: none;
+}
+
+.loginOrSignup {
+  margin: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/**/

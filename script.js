@@ -1,155 +1,114 @@
-function $(id) {
-  return document.getElementById(id);
+
+const $ = (id) => document.getElementById(id);
+const user = (id) => ($(id)?.value ?? "").trim();
+const err = (id, msg = "") => { const e = $(id); if (e) e.textContent = msg; };
+const clearErr = () => document.querySelectorAll(".error-message").forEach(e => e.textContent = "");
+const emailOk = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(s);
+
+function passwordOk(p) {
+  if (p.length < 8 || p.length > 20) return "Password must be 8–20 characters.";
+  if (!/[a-z]/.test(p)) return "Password needs a lowercase letter.";
+  if (!/[A-Z]/.test(p)) return "Password needs an uppercase letter.";
+  if (!/\d/.test(p)) return "Password needs a number.";
+  if (!/[!@#$%^&*()_\-+=\[\]{};:'",.<>/?\\|`~]/.test(p)) return "Password needs a special character.";
+  if (/\s/.test(p)) return "Password must not contain spaces.";
+  return "";
 }
 
-function setError(id, text) {
-  const errorElement = $(id);
-  if (errorElement) errorElement.textContent = text;
-}
-function clearError(id) {
-  document
-    .querySelectorAll(".error-message")
-    .forEach((element) => (element.textContent = ""));
-}
-function isValidEmail(email) {
-  return email.includes("@") && email.includes(".");
-}
 
-/* Registration Page */
-function initRegistration() {
-  const regForm = document.querySelector(".RegistrationSection form");
-  if (!regForm) return;
-
-  regForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    clearError();
-
-    const userId = $("username");
-    const password = $("password");
-    const name = $("Name") || $("name");
-    const zipCode = $("ZipCode") || $("zipCode");
-    const email = $("email");
-
-    let ok = true;
-
-    const uid = userId ? userId.value.trim() : "";
-    if (uid.length < 5 || uid.length > 12) {
-      setError(
-        "usernameError",
-        "Username must be between 5 and 12 characters.",
-      );
-      ok = false;
-    }
-    const pwd = password ? password.value.trim() : "";
-    if (pwd.length < 7 || pwd.length > 12) {
-      setError(
-        "passwordError",
-        "Password must be between 7 and 12 characters.",
-      );
-      ok = false;
-    }
-    const nm = name ? name.value.trim() : "";
-    if (!nm || !/^[a-zA-Z\s]+$/.test(nm)) {
-      setError(
-        "nameError",
-        "Required. Name must contain only letters and spaces.",
-      );
-      ok = false;
-    }
-    const addr = $("address");
-    const country = $("country");
-    if (!country || !country.value) {
-      setError("countryError", "Required. Please select a country.");
-      ok = false;
-    }
-    const zp = zipCode ? zipCode.value.trim() : "";
-    if (!zp || !/^\d+$/.test(zp)) {
-      setError("zipCodeError", "Required. Zip Code must contain only digits.");
-      ok = false;
-    }
-    const eml = email ? email.value.trim() : "";
-    if (!eml || !isValidEmail(eml)) {
-      setError("emailError", "Please enter a valid email address.");
-      ok = false;
-    }
-    const sex = document.querySelector('input[name="sex"]:checked');
-    if (!sex) {
-      setError("sexError", "Required. ");
-      ok = false;
-    }
-
-    const language = document.querySelectorAll(
-      'input[name="language"]:checked',
-    );
-    if (!language || language.length === 0) {
-      setError("languageError", "Required.");
-      ok = false;
-    }
-    const about = $("about");
-
-    if (ok) {
-      const user = {
-        username: uid,
-        password: pwd,
-        name: nm,
-        zipCode: zp,
-        country: country.value,
-        email: eml,
-        sex: sex.value,
-        addr:   addr ? addr.value.trim() : "",
-        about: about ? about.value.trim() : "",
-        languages: Array.from(language).map((l) => l.value),
-      };
-        localStorage.setItem("simpleUser", JSON.stringify(user));
-
-      alert("Registration successful!");
-      regForm.reset();
-    }
-  });
+function regData() {
+  return {
+    username: user("username"),
+    password: user("password"),
+    name: user("Name") || user("name"),
+    zipCode: user("ZipCode") || user("zipCode"),
+    country: $("country")?.value || "",
+    email: user("email").toLowerCase(),
+    sex: document.querySelector('input[name="sex"]:checked')?.value || "",
+    languages: [...document.querySelectorAll('input[name="language"]:checked')].map(x => x.value),
+    addr: user("address"),
+    about: user("about"),
+  };
 }
 
-function initLogin() {
-  const loginForm = document.querySelector(".LoginSection form");
-  if (!loginForm) return;
-
-  loginForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    clearError();       
-
-    const email = $("email");
-    const password = $("password"); 
-    const agreement = $("agreement");
-
-    const saved = localStorage.getItem("simpleUser");
-    if (!saved) {
-        setError("loginError", "No registered user found. Please register first."); 
-        return;
-    }
-     if (!agreement || !agreement.checked) {
-      setError("agreementError", "You must agree to the terms and conditions.");
-      return;
-    }
-
-    const user = JSON.parse(saved);
-    const eml = email ? email.value.trim().toLowerCase() : "";
-    const pwd = password ? password.value : "";
-
-    if(eml === user.email)
-    {
-        setError("loginError", "Email not correct.");
-    return;
-    }
-    if(pwd === user.password)
-    {
-        setError("loginError", "Password not correct.");
-    return;
-    }
-    alert("Login successful!");
-    loginForm.reset();
-  });
+function loginData() {
+  return {
+    email: user("email").toLowerCase(),
+    password: user  ("password"),
+    agreement: $("agreement")?.checked || false,
+  };
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initRegistration();
-  initLogin();
-});
+
+function validateReg(userRegister) {
+  let ok = true;
+
+  if (userRegister.username.length < 5 || userRegister.username.length > 12) (err("usernameError","Username must be 5–12 chars."), ok=false);
+
+  const pmsg = passwordOk(userRegister.password);
+  if (pmsg) (err("passwordError", pmsg), ok=false);
+
+  if (!userRegister.name || !/^[a-zA-Z\s]+$/.test(userRegister.name)) (err("nameError","Name: letters & spaces only."), ok=false);
+
+  if (!userRegister.country) (err("countryError","Please select a country."), ok=false);
+
+  if (!userRegister.zipCode || !/^\d+$/.test(userRegister.zipCode)) (err("zipCodeError","Zip: digits only."), ok=false);
+
+  if (!userRegister.email || !emailOk(userRegister.email)) (err("emailError","Enter a valid email."), ok=false);
+
+  if (!userRegister.sex) (err("sexError","Required."), ok=false);
+
+  if (!userRegister.languages.length) (err("languageError","Required."), ok=false);
+
+  return ok;
+}
+
+
+const KEY = "simpleUser";
+const saveUser = (u) => localStorage.setItem(KEY, JSON.stringify(u));
+const loadUser = () => {
+  const s = localStorage.getItem(KEY);
+  return s ? JSON.parse(s) : null;
+};
+
+
+function onRegister(e, form) {
+  e.preventDefault();
+  clearErr();
+
+  const userRegister = regData();
+  if (!validateReg(userRegister)) return;
+
+  saveUser(userRegister);
+  alert("Registration successful!");
+  form.reset();
+}
+
+function onLogin(e, form) {
+  e.preventDefault();
+  clearErr();
+
+  const d = loginData();
+  const user = loadUser();
+
+  if (!user) return err("loginError", "No registered user. Please register first.");
+  if (!d.agreement) return err("agreementError", "You must agree to the terms.");
+
+
+  if (d.email !== (user.email || "").toLowerCase()) return err("loginError", "Email not correct.");
+  if (d.password !== (user.password || "")) return err("loginError", "Password not correct.");
+
+  alert("Login successful!");
+  form.reset();
+}
+
+
+function init() {
+  const reg = document.querySelector(".RegistrationSection form");
+  if (reg) reg.addEventListener("submit", (e) => onRegister(e, reg));
+
+  const log = document.querySelector(".LoginSection form");
+  if (log) log.addEventListener("submit", (e) => onLogin(e, log));
+}
+
+document.addEventListener("DOMContentLoaded", init);

@@ -11,20 +11,27 @@ body {
 
 .LoginSection,
 .RegistrationSection {
-  width: 1150px;
   display: flex;
+  flex-wrap: wrap;
+  width: min(100% - 40px , 1100px);
   margin: 70px auto;
   background-color: #f6f6f6;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .left.side {
-  width: 37%;
+  display: flex;
+  width: 36%;
+  min-width: 320px;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #08a7f7;
   color: #fff;
   padding: 75px 50px;
   position: relative;
 }
+
 .left.side .signup h1,
 .left.side .signin h1 {
   font-size: 52px;
@@ -39,21 +46,24 @@ body {
   opacity: 0.9;
   max-width: 250px;
 }
-.left.side .signin {
-  position: absolute;
-  bottom: 70px;
-  left: 55px;
-}
 /* Rigt side styling */
 
 .right.side {
-  width: 63%;
-  padding: 85px 140px;
+  padding: 60px 90px;
   position: relative;
+  display: block;
+  width: 64%;
+}
+.right.side form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap :22px 28px ;
+}
+.field.full {
+    grid-column: 1 / -1;
 }
 .email {
-    width: 250px;
-   
+  width: 100%;
 }
 .right.side form label {
   display: inline-block;
@@ -74,16 +84,10 @@ body {
   outline: none;
   font-size: 16px;
   margin-bottom: 15px;
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 12px;
   opacity: 0.9;
-  height: 30px;
 }
 
-.right.side form input:focus,
-.right.side form select:focus {
-  border-bottom-color: #bdbdbd;
-}
 .right.side form textarea {
   width: 100%;
   border: 2px solid #e1e1e1;
@@ -134,16 +138,6 @@ body {
   text-decoration: underline;
   border: none;
 }
-.right.side form {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 25px;
-}
-
-.right.side br {
-  display: none;
-}
 
 .loginOrSignup {
   margin: 20px 32px;
@@ -158,5 +152,24 @@ body {
   margin-bottom: 20px;
   display: block;
 }
+@media (max-width: 900px){
+  .LoginSection,
+  .RegistrationSection{
+    flex-direction: column;
+  }
 
+  .left.side,
+  .right.side{
+    width: 100%;
+    min-width: 0;
+  }
+
+  .right.side{
+    padding: 35px 28px;
+  }
+
+  .right.side form{
+    grid-template-columns: 1fr;
+  }
+}
 /**/

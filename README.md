@@ -1,48 +1,20 @@
-Sample Registration & Login Form
+# Registration & Login Form
 
-A simple Registration and Login form built using HTML, CSS, and JavaScript.
+A simple, responsive split-screen Registration and Login system built with Vanilla JS.
 
-📌 Features
+## 🚀 Features
+* **Split Layout:** Modern blue panel + form design.
+* **Form Validation:** Basic JavaScript validation for inputs.
+* **Local Storage:** Saves user data locally (no backend required).
+* **Pure Web Tech:** No external libraries used.
 
-Modern split layout design
+## 🛠️ Technologies
+* HTML5, CSS3, JavaScript (Vanilla)
 
-Registration form with basic validation
+## 📖 How to Use
+1. Clone the repository.
+2. Open `Registration.html` to create a user.
+3. Open `login.html` to log in with your saved credentials.
 
-Login form with basic validation
-
-Error messages displayed near input fields
-
-Simple JavaScript validation (no libraries)
-
-Data stored temporarily using localStorage
-
-🛠 Technologies Used
-
-HTML5
-
-CSS3
-
-JavaScript (Vanilla JS)
-
-📂 Project Structure
-/project-folder
-│
-├── login.html
-├── Registration.html
-├── style.css
-└── script.js
-🚀 How to Run
-
-Download or clone the repository:
-
-git clone https://github.com/your-username/your-repo-name.git
-
-Open login.html or Registration.html in your browser.
-
-📖 Notes
-
-This project is for learning purposes.
-
-Validation is simple and handled with JavaScript only.
-
-No backend or database is used.
+## ⚠️ Note
+This project is for **demonstration and practice only**. Data is stored in `localStorage` and is not encrypted. Do not use sensitive or real-world passwords.

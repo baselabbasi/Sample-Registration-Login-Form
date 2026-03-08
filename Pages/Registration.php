@@ -1,11 +1,12 @@
 <?php
-require_once '../lib/helpers.php';
+require_once '/var/www/html/Sample-Registration-Login-Form/domain/helper.php';
 
-$error = [];
+$errors = [];
 $old = [];
+$countries = ['Egypt', 'Saudi Arabia', 'Jordan', 'Syria', 'Iraq', 'Lebanon', 'Libya', 'Yemen', 'Sudan', 'Algeria', 'Morocco'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $error = validate_register($_POST);
+  $errors = validate_register($_POST);
 
   $old = [
     'username' => trim((string) ($_POST['username'] ?? '')),
@@ -20,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ];
   if (!$errors) {
     if (find_user_by_email($old['email']))
-      $errors['email'] = "Email already registered.";
+      $errors['email'] = 'Email already registered.';
     if (find_user_by_username($old['username']))
-      $errors['username'] = "Username already exists.";
+      $errors['username'] = 'Username already exists.';
   }
   if (!$errors) {
     $user = [
@@ -46,9 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       mkdir($dir, 0775, true);
 
     flash_set('success', 'Registration successful! Please log in.');
-    redirect('login.php');
+    redirect('Login.php');
   }
-  $countries = ["Egypt", "Saudi Arabia", "Jordan", "Syria", "Iraq", "Lebanon", "Libya", "Yemen", "Sudan", "Algeria", "Morocco"];
   $flash = flash_get();
 }
 ?>
@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registration</title>
-  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
+
 </head>
 
 <body>
@@ -147,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="field full">
           <label for="language">Language:</label>
 
-          <?php $langs = (array)($old['language'] ?? []); ?>
+          <?php $langs = (array) ($old['language'] ?? []); ?>
 
         <input type="checkbox" id="arabic" name="language[]" value="arabic" <?= in_array('arabic', $langs, true) ? 'checked' : '' ?>>
           <label for="arabic">Arabic</label>
@@ -176,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </section>
 
-  <script src="script.js"></script>
+  
 </body>
 
 </html>

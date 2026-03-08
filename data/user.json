@@ -1,1 +1,75 @@
-[]
+[
+    {
+        "username": "Basel",
+        "password_hash": "$2y$10$32I6i3s1tOJma4CdBu0pIeiQPVais5at1Fl.\/alk7YtbglzoZI.LG",
+        "name": "",
+        "zipCode": "",
+        "country": "",
+        "email": "",
+        "sex": "",
+        "languages": [],
+        "addr": "",
+        "about": "",
+        "createdAt": "2026-03-05T08:53:12+00:00"
+    },
+    {
+        "username": "BASEL1",
+        "password_hash": "$2y$10$0ShOWbSHQYEZjAtwhxOfi.VsTCrwuLoveX5.Z58Thjxe5bg9ulvZW",
+        "name": "‪Baael Abbasi‬‏",
+        "zipCode": "34588",
+        "country": "",
+        "email": "baselabbasi863@gmail.com",
+        "sex": "male",
+        "languages": [
+            "arabic"
+        ],
+        "addr": "Amman",
+        "about": "",
+        "createdAt": "2026-03-05T08:54:41+00:00"
+    },
+    {
+        "username": "Ahmad",
+        "password_hash": "$2y$10$Ne\/qVpdYcOfSwy6SaSBt5O6HTALU4sonzen9svwJTYPFzfkH1jZle",
+        "name": "ahmad",
+        "zipCode": "34588",
+        "country": "",
+        "email": "ahmad@gmail.com",
+        "sex": "male",
+        "languages": [
+            "arabic"
+        ],
+        "addr": "Amman",
+        "about": "",
+        "createdAt": "2026-03-05T08:57:43+00:00"
+    },
+    {
+        "username": "Moh123",
+        "password_hash": "$2y$10$W2a1tPdOBYSuDHJeble3ROpSRtDnmKR6cASTB069TfcmAThzaZwHS",
+        "name": "Moh abbasi",
+        "zipCode": "34588",
+        "country": "Syria",
+        "email": "moh0@gmail.com",
+        "sex": "female",
+        "languages": [
+            "Non Arabic"
+        ],
+        "addr": "Amman",
+        "about": "",
+        "createdAt": "2026-03-05T12:25:13+00:00"
+    },
+    {
+        "username": "2334567",
+        "password_hash": "$2y$10$PsidI.wDAebo8jWGwSwF4eywvyoKPhFodkF9EscOZ8wRjAkvLeJGq",
+        "name": "Etedal",
+        "zipCode": "34588",
+        "country": "Jordan",
+        "email": "etedal@sprintive.com",
+        "sex": "female",
+        "languages": [
+            "arabic"
+        ],
+        "addr": "Amman",
+        "about": "test",
+        "createdAt": "2026-03-05T12:31:15+00:00"
+    }
+]

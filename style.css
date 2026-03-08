@@ -13,7 +13,7 @@ body {
 .RegistrationSection {
   display: flex;
   flex-wrap: wrap;
-  width: min(100% - 40px , 1100px);
+  width: min(100% - 40px, 1100px);
   margin: 70px auto;
   background-color: #f6f6f6;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -55,12 +55,12 @@ body {
   width: 64%;
 }
 .right.side form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap :22px 28px ;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 28px;
 }
 .field.full {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
 .email {
   width: 100%;
@@ -152,24 +152,251 @@ body {
   margin-bottom: 20px;
   display: block;
 }
-@media (max-width: 900px){
+.flash {
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border-radius: 3x;
+}
+.flash.success {
+  background-color: #e7f7e7;
+  color: #1db61d;
+}
+.flash.error {
+  background-color: #fde8e8;
+  color: #d11b1b;
+}
+@media (max-width: 900px) {
   .LoginSection,
-  .RegistrationSection{
+  .RegistrationSection {
     flex-direction: column;
   }
 
   .left.side,
-  .right.side{
+  .right.side {
     width: 100%;
     min-width: 0;
   }
 
-  .right.side{
+  .right.side {
     padding: 35px 28px;
   }
 
-  .right.side form{
+  .right.side form {
     grid-template-columns: 1fr;
   }
 }
-/**/
+.fm-body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eee;
+}
+
+/* Top header */
+.fm-header {
+  background: #444;
+  color: #eee;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+}
+.fm-header .title {
+  font-size: 26px;
+  opacity: 0.9;
+}
+.fm-header .right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.fm-header a {
+  color: #eee;
+  text-decoration: none;
+  opacity: 0.9;
+}
+.fm-header a:hover {
+  text-decoration: underline;
+}
+
+/* Page container */
+.fm-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 22px 18px 40px;
+}
+
+/* Sub header row */
+.fm-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 18px;
+}
+.fm-sub .h {
+  font-size: 30px;
+  font-weight: 700;
+  color: #333;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.fm-sub .actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Buttons */
+.fm-btn {
+  border: 0;
+  background: #0c82c7;
+  color: #fff;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.fm-btn:hover {
+  filter: brightness(0.95);
+}
+.fm-btn.gray {
+  background: #888;
+}
+
+/* Card + table */
+.fm-card {
+  background: #fff;
+  border: 1px solid #ddd;
+}
+.fm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.fm-table th {
+  background: #f2f2f2;
+  color: #333;
+  text-align: left;
+  padding: 14px 14px;
+  border-bottom: 1px solid #ddd;
+  font-weight: 700;
+}
+
+.fm-table td {
+  padding: 16px 14px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.fm-name-details{
+  color: #999;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.fm-table tr:hover {
+  background: #fafafa;
+}
+.fm-link {
+  color: #0c82c7;
+  text-decoration: none;
+}
+.fm-link:hover {
+  text-decoration: underline;
+}
+
+/* Manage icons */
+.fm-icon {
+  border: 1px solid #bbb;
+  background: #fff;
+  padding: 6px 10px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+.fm-icon:hover {
+  background: #f4f4f4;
+}
+.fa-eye{
+  color :#1aa155;
+}
+.fm-icon.view {
+
+border-color: #000000;
+}
+.fm-icon.del {
+  border-color: #000000;
+
+}
+.fa-trash-can
+{
+  color: red;
+}
+/* Footer */
+.fm-footer {
+  background: #444;
+  color: #ddd;
+  text-align: center;
+  padding: 18px;
+  margin-top: 40px;
+}
+
+/* Alerts */
+.fm-alert {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 2px;
+}
+.fm-alert.err {
+  background: #ffebee;
+  color: #b00020;
+}
+.fm-alert.ok {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+/* Modal */
+.fm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.fm-overlay.open {
+  display: flex;
+}
+.fm-modal {
+  background: #fff;
+  width: min(92vw, 620px);
+  padding: 18px 18px 16px;
+  position: relative;
+  border: 1px solid #ddd;
+}
+.fm-modal h3 {
+  margin: 6px 0 14px;
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+}
+.fm-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+.fm-input {
+  width: 100%;
+  border: 2px solid #0c82c7;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 14px;
+}
+.fm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

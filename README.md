@@ -1,20 +1,25 @@
-# Registration & Login Form
 
-A simple, responsive split-screen Registration and Login system built with Vanilla JS.
 
-## 🚀 Features
-* **Split Layout:** Modern blue panel + form design.
-* **Form Validation:** Basic JavaScript validation for inputs.
-* **Local Storage:** Saves user data locally (no backend required).
-* **Pure Web Tech:** No external libraries used.
+# 🔐 Sample Registration & Login Form
 
-## 🛠️ Technologies
-* HTML5, CSS3, JavaScript (Vanilla)
+A streamlined, single-folder user authentication system. This project has been refactored for better logic flow and code cleanliness.
 
-## 📖 How to Use
-1. Clone the repository.
-2. Open `Registration.html` to create a user.
-3. Open `login.html` to log in with your saved credentials.
+---
 
-## ⚠️ Note
-This project is for **demonstration and practice only**. Data is stored in `localStorage` and is not encrypted. Do not use sensitive or real-world passwords.
+## ✨ Features
+* **Simple Authentication:** Secure registration and login functionality.
+* **Flat Structure:** All essential files are organized in a single directory for easy access.
+* **Responsive UI:** Works across all device sizes.
+* **Refactored Code:** Cleaned up logic and removed redundant scripts.
+
+## 🚀 How to Run
+1. **Clone the project:**
+   \`\`\`bash
+   git clone https://github.com/baselabbasi/Sample-Registration-Login-Form.git
+   \`\`\`
+2. **Setup:**
+   - Place the folder in your web server directory (e.g., \`/var/www/html/\`).
+3. **Launch:**
+   - Open \`http://localhost/Sample-Registration-Login-Form/index.html\` in your browser.
+
+

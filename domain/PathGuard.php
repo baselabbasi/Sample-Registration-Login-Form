@@ -44,32 +44,20 @@ class PathGuard extends UserDirectoryCore
         return $name;
     }
 
-    protected function join(string $rel): string
-    {
-        $rel = $this->normalizeRel($rel);
-        return $this->root . ($rel !== '' ? DIRECTORY_SEPARATOR . $rel : '');
-    }
-
-    protected function assertInsideRoot(string $abs): void
-    {
-        $abs = rtrim($abs, DIRECTORY_SEPARATOR);
-
-        if (strpos($abs, $this->root) !== 0) {
-            throw new RuntimeException('Forbidden path');
-        }
-    }
-
+  
     public function absExisting(string $rel): string
     {
-        $abs = $this->join($rel);
+        $rel = ($rel === '' || $rel === '.') ? '' : $this->normalizeRel($rel);
+        $abs = $this->root . ($rel !== '' ? DIRECTORY_SEPARATOR . $rel : '');
+        
         $real = realpath($abs);
-
         if ($real === false) {
             throw new RuntimeException('Not found');
         }
 
-        $real = rtrim($real, DIRECTORY_SEPARATOR);
-        $this->assertInsideRoot($real);
+        if (strpos(rtrim($real, DIRECTORY_SEPARATOR), $this->root) !== 0) {
+            throw new RuntimeException('Forbidden path');
+        }
 
         return $real;
     }

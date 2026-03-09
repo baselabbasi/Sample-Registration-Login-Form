@@ -1,14 +1,19 @@
 <?php
 require_once __DIR__ . '/../domain/helper.php';
-require_once __DIR__ . '/../domain/FileUploader.php';
+require_once __DIR__ . '/../domain/FileLister.php';
+require_once __DIR__ . '/../domain/PathGuard.php';
+require_once __DIR__ . '/../domain/FileService.php';
 
 require_login();
 $user = current_user();
 
-$fm = new FileUploader(STORAGE_ROOT, (string) ($user['username'] ?? ''));
+$fm = new PathGuard(STORAGE_ROOT, (string) ($user['username'] ?? ''));
+
+$fileServicde = new FileService($fm);
+$lister = new FileLister($fm);
 
 $dir = (string) ($_GET['dir'] ?? '');
-$dir = $fm->normalizeRel($dir);
+$dir = ($dir === '' || $dir === '.') ? '' : $fm->normalizeRel($dir);
 
 $err = null;
 $ok = null;
@@ -19,24 +24,19 @@ try {
 
     if ($action === 'mkdir') {
       $name = (string) ($_POST['name'] ?? '');
-      $fm->makeDir($dir, $name);
+      $fileService->makeDir($dir, $name);
       $ok = 'Folder created.';
     } elseif ($action === 'delete') {
       $path = (string) ($_POST['path'] ?? '');
-      $fm->delete($path);
+      $fileService->delete($path);
       $ok = 'Deleted.';
-    } elseif ($action === 'rename') {
-      $path = (string) ($_POST['path'] ?? '');
-      $new = (string) ($_POST['new_name'] ?? '');
-      $fm->rename($path, $new);
-      $ok = 'Renamed.';
     } elseif ($action === 'upload') {
-      $fm->upload($dir, $_FILES['file'] ?? []);
+      $fileService->upload($dir, $_FILES['file'] ?? []);
       $ok = 'Uploaded.';
     }
   }
 
-  $items = $fm->list($dir);
+  $items = $lister->list($dir);
 } catch (Throwable $t) {
   $err = $t->getMessage();
   $items = [];

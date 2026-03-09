@@ -2,44 +2,35 @@
 
 require_once 'PathGuard.php';
 
-class FileLister extends PathGuard
+class FileLister
 {
+    private PathGuard $guard;
+
+    public function __construct(PathGuard $guard)
+    {
+        $this->guard = $guard;
+    }
+
     public function list(string $relDir = ''): array
     {
-        $dir = $this->absExisting($relDir);
-
-        if (!is_dir($dir)) {
-            throw new RuntimeException('Not a directory');
-        }
-
+        $dir = $this->guard->absExisting($relDir);
         $items = scandir($dir);
-        if ($items === false) {
-            throw new RuntimeException('Cannot read directory');
-        }
-
         $out = [];
 
         foreach ($items as $it) {
-            if ($it === '.' || $it === '..') {
-                continue;
-            }
-
+            if ($it === '.' || $it === '..') continue;
             $p = $dir . DIRECTORY_SEPARATOR . $it;
             $out[] = [
                 'name' => $it,
                 'isDir' => is_dir($p),
-                'size' => is_file($p) ? (int) filesize($p) : 0,
-                'mtime' => (int) (filemtime($p) ?: 0),
+                'size' => is_file($p) ? filesize($p) : 0,
+                'mtime' => filemtime($p) ?: 0,
             ];
         }
 
-        usort($out, function ($a, $b) {
-            if ($a['isDir'] !== $b['isDir']) {
-                return $a['isDir'] ? -1 : 1;
-            }
-
-            return strcasecmp($a['name'], $b['name']);
-        });
+        usort($out, fn($a, $b) => ($a['isDir'] === $b['isDir']) 
+            ? strcasecmp($a['name'], $b['name']) 
+            : ($a['isDir'] ? -1 : 1));
 
         return $out;
     }

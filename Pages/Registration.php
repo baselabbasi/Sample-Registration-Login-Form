@@ -1,6 +1,5 @@
 <?php
-require_once '/var/www/html/Sample-Registration-Login-Form/domain/helper.php';
-
+require_once __DIR__ . '/../domain/helper.php';
 $errors = [];
 $old = [];
 $countries = ['Egypt', 'Saudi Arabia', 'Jordan', 'Syria', 'Iraq', 'Lebanon', 'Libya', 'Yemen', 'Sudan', 'Algeria', 'Morocco'];
